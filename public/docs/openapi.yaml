@@ -1,0 +1,346 @@
+openapi: 3.0.3
+info:
+  title: TechTest
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'http://127.0.0.1:8000'
+paths:
+  /api/articles:
+    get:
+      summary: 'List all articles with pagination.'
+      operationId: listAllArticlesWithPagination
+      description: ''
+      parameters:
+        -
+          in: query
+          name: page
+          description: 'The page number.'
+          example: 1
+          required: false
+          schema:
+            type: integer
+            description: 'The page number.'
+            example: 1
+        -
+          in: query
+          name: per_page
+          description: 'The number of items per page. Defaults to 10.'
+          example: 5
+          required: false
+          schema:
+            type: integer
+            description: 'The number of items per page. Defaults to 10.'
+            example: 5
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 1
+                      title: 'Sample Article'
+                      content: 'This is a sample article.'
+                      created_at: '2023-01-01T00:00:00.000000Z'
+                      updated_at: '2023-01-01T00:00:00.000000Z'
+                  links:
+                    first: 'http://your-app-url/api/articles?page=1'
+                    last: 'http://your-app-url/api/articles?page=2'
+                    prev: null
+                    next: 'http://your-app-url/api/articles?page=2'
+                  meta:
+                    current_page: 1
+                    from: 1
+                    last_page: 2
+                    path: 'http://your-app-url/api/articles'
+                    per_page: 5
+                    to: 5
+                    total: 10
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        title: 'Sample Article'
+                        content: 'This is a sample article.'
+                        created_at: '2023-01-01T00:00:00.000000Z'
+                        updated_at: '2023-01-01T00:00:00.000000Z'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        title:
+                          type: string
+                          example: 'Sample Article'
+                        content:
+                          type: string
+                          example: 'This is a sample article.'
+                        created_at:
+                          type: string
+                          example: '2023-01-01T00:00:00.000000Z'
+                        updated_at:
+                          type: string
+                          example: '2023-01-01T00:00:00.000000Z'
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                        example: 'http://your-app-url/api/articles?page=1'
+                      last:
+                        type: string
+                        example: 'http://your-app-url/api/articles?page=2'
+                      prev:
+                        type: string
+                        example: null
+                      next:
+                        type: string
+                        example: 'http://your-app-url/api/articles?page=2'
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: integer
+                        example: 1
+                      from:
+                        type: integer
+                        example: 1
+                      last_page:
+                        type: integer
+                        example: 2
+                      path:
+                        type: string
+                        example: 'http://your-app-url/api/articles'
+                      per_page:
+                        type: integer
+                        example: 5
+                      to:
+                        type: integer
+                        example: 5
+                      total:
+                        type: integer
+                        example: 10
+      tags:
+        - Articles
+      security: []
+    post:
+      summary: 'Store a new article.'
+      operationId: storeANewArticle
+      description: 'Create a new article with the provided title and content.'
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 2
+                  title: 'New Article'
+                  content: 'This is the content of the new article.'
+                  created_at: '2023-01-01T00:00:00.000000Z'
+                  updated_at: '2023-01-01T00:00:00.000000Z'
+                properties:
+                  id:
+                    type: integer
+                    example: 2
+                  title:
+                    type: string
+                    example: 'New Article'
+                  content:
+                    type: string
+                    example: 'This is the content of the new article.'
+                  created_at:
+                    type: string
+                    example: '2023-01-01T00:00:00.000000Z'
+                  updated_at:
+                    type: string
+                    example: '2023-01-01T00:00:00.000000Z'
+      tags:
+        - Articles
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: 'The title of the article.'
+                  example: '"New Article"'
+                content:
+                  type: string
+                  description: 'The content of the article.'
+                  example: '"This is the content of the new article."'
+                image:
+                  type: string
+                  format: binary
+                  description: 'The image file associated with the article.'
+              required:
+                - title
+                - content
+      security: []
+  '/api/articles/{id}':
+    get:
+      summary: 'Show a specific article.'
+      operationId: showASpecificArticle
+      description: 'Retrieve a specific article by its ID.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 1
+                  title: 'Sample Article'
+                  content: 'This is a sample article.'
+                  created_at: '2023-01-01T00:00:00.000000Z'
+                  updated_at: '2023-01-01T00:00:00.000000Z'
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  title:
+                    type: string
+                    example: 'Sample Article'
+                  content:
+                    type: string
+                    example: 'This is a sample article.'
+                  created_at:
+                    type: string
+                    example: '2023-01-01T00:00:00.000000Z'
+                  updated_at:
+                    type: string
+                    example: '2023-01-01T00:00:00.000000Z'
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Record not found.'
+                properties:
+                  message:
+                    type: string
+                    example: 'Record not found.'
+      tags:
+        - Articles
+      security: []
+    put:
+      summary: 'Update an article.'
+      operationId: updateAnArticle
+      description: 'Update the specified article with new data.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 1
+                  title: 'Updated Article'
+                  content: 'This is the updated content.'
+                  created_at: '2023-01-01T00:00:00.000000Z'
+                  updated_at: '2023-01-01T00:00:00.000000Z'
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  title:
+                    type: string
+                    example: 'Updated Article'
+                  content:
+                    type: string
+                    example: 'This is the updated content.'
+                  created_at:
+                    type: string
+                    example: '2023-01-01T00:00:00.000000Z'
+                  updated_at:
+                    type: string
+                    example: '2023-01-01T00:00:00.000000Z'
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Record not found.'
+                properties:
+                  message:
+                    type: string
+                    example: 'Record not found.'
+      tags:
+        - Articles
+      requestBody:
+        required: false
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: 'The new title of the article.'
+                  example: '"Updated Article"'
+                content:
+                  type: string
+                  description: 'The new content of the article.'
+                  example: '"This is the updated content."'
+                image:
+                  type: string
+                  format: binary
+                  description: 'The image file associated with the article.'
+      security: []
+    delete:
+      summary: 'Delete an article.'
+      operationId: deleteAnArticle
+      description: 'Remove the specified article from the database.'
+      parameters: []
+      responses:
+        204:
+          description: ''
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Record not found.'
+                properties:
+                  message:
+                    type: string
+                    example: 'Record not found.'
+      tags:
+        - Articles
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the article.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+tags:
+  -
+    name: Articles
+    description: ''
