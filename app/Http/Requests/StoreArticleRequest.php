@@ -2,8 +2,15 @@
 
 namespace App\Http\Requests;
 
+use http\Client\Request;
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ *
+ * @param Request $request
+ *
+ * @return ${RETURN_TYPE}
+ */
 class StoreArticleRequest extends FormRequest
 {
     /**
@@ -35,6 +42,9 @@ class StoreArticleRequest extends FormRequest
         ];
     }
 
+    /**
+     * @return array
+     */
     public function bodyParameters()
     {
         return [

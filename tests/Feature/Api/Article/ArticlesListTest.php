@@ -5,13 +5,20 @@ declare(strict_types=1);
 namespace Tests\Feature\Api\Article;
 
 use App\Models\Article;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ArticlesListTest extends TestCase
 {
     use RefreshDatabase;
+    use WithoutModelEvents;
 
+    /**
+     * Get All Articles Test
+     *
+     * @return void
+     */
     public function testCanListAllArticles()
     {
         Article::factory()->count(10)->create();
@@ -27,26 +34,46 @@ class ArticlesListTest extends TestCase
                         'id',
                         'title',
                         'content',
-                        'created_at',
-                        'updated_at',
-                        'deleted_at',
                         'image_url',
-                        'media'
+                        'media' => [
+                            '*' => [
+                                'id',
+                                'model_type',
+                                'model_id',
+                                'uuid',
+                                'collection_name',
+                                'name',
+                                'file_name',
+                                'mime_type',
+                                'disk',
+                                'conversions_disk',
+                                'size',
+                                'manipulations',
+                                'custom_properties',
+                                'generated_conversions',
+                                'responsive_images',
+                                'order_column',
+                                'created_at',
+                                'updated_at',
+                                'original_url',
+                                'preview_url',
+                            ]
+                        ]
                     ]
-                ],
-                'first_page_url',
-                'from',
-                'last_page',
-                'last_page_url',
-                'links' => [
-                    '*' => ['url', 'label', 'active']
-                ],
-                'next_page_url',
-                'path',
-                'per_page',
-                'prev_page_url',
-                'to',
-                'total'
-            ]);
+            ],
+            'first_page_url',
+            'from',
+            'last_page',
+            'last_page_url',
+            'links' => [
+                '*' => ['url', 'label', 'active']
+            ],
+            'next_page_url',
+            'path',
+            'per_page',
+            'prev_page_url',
+            'to',
+            'total'
+        ]);
     }
 }

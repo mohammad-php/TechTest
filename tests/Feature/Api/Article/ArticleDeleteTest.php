@@ -12,6 +12,11 @@ class ArticleDeleteTest extends TestCase
 {
     use RefreshDatabase;
 
+    /**
+     * Delete Article Test
+     *
+     * @return void
+     */
     public function testCanDeleteAnArticle()
     {
         $article = Article::factory()->create();
@@ -26,6 +31,11 @@ class ArticleDeleteTest extends TestCase
         $this->assertSoftDeleted('articles', ['id' => $article->id]);
     }
 
+    /**
+     * Validate Delete Article Test
+     *
+     * @return void
+     */
     public function testReturnsNotFoundForNonExistentArticleOnDelete()
     {
         $response = $this->deleteJson(route(

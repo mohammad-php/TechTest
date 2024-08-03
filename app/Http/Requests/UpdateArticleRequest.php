@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -24,14 +26,14 @@ class UpdateArticleRequest extends FormRequest
     {
         return [
             'title' => [
-                'sometimes',
+                'required',
                 'string',
                 'max:255',
                 Rule::unique('articles', 'title')
-                    ->ignore($this->id),
+                    ->ignore($this->route('article')),
             ],
             'content' => [
-                'sometimes',
+                'required',
                 'string',
             ],
             'image' => [
@@ -43,6 +45,9 @@ class UpdateArticleRequest extends FormRequest
         ];
     }
 
+    /**
+     * @return array[]
+     */
     public function bodyParameters()
     {
         return [

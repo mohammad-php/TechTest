@@ -2,6 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\Article;
+use App\Observers\ArticleCreateObserver;
+use App\Observers\ArticleUpdateObserver;
+use App\Services\AWS\LambdaClientService;
+use App\Services\AWS\LambdaInvoker;
+use App\Services\LambdaNotificationService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,7 +17,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton(LambdaClientService::class);
+        $this->app->singleton(LambdaInvoker::class);
+        $this->app->singleton(LambdaNotificationService::class);
     }
 
     /**
@@ -19,6 +27,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Article::observe([
+            ArticleCreateObserver::class,
+            ArticleUpdateObserver::class,
+        ]);
     }
 }

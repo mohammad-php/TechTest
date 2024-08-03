@@ -27,7 +27,7 @@
           </div>
         </div>
       </div>
-      <div class="pagination-container flex-center">
+      <div v-if="articles" class="pagination-container flex-center">
         <pagination
             :currentPage="currentPage"
             :totalPages="lastPage"

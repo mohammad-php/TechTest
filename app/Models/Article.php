@@ -26,11 +26,19 @@ class Article extends Model implements HasMedia
         'content',
     ];
 
+    /**
+     * Custom Attributes
+     *
+     * @var string[]
+     */
     protected $appends = [
         'image_url'
     ];
 
 
+    /**
+     * @return void
+     */
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection(
@@ -38,6 +46,9 @@ class Article extends Model implements HasMedia
         )->singleFile();
     }
 
+    /**
+     * @return string|null
+     */
     public function getImageUrlAttribute(): ?string
     {
         $media = $this->getFirstMedia(

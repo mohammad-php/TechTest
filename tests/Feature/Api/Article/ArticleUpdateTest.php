@@ -8,12 +8,19 @@ use App\Enums\MediaCollection;
 use App\Models\Article;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 use Tests\TestCase;
 
 class ArticleUpdateTest extends TestCase
 {
     use RefreshDatabase;
 
+    /**
+     * Update Article Test
+     *
+     * @return void
+     */
     public function testCanUpdateAnArticle()
     {
         $article = Article::factory()->create();
@@ -41,6 +48,13 @@ class ArticleUpdateTest extends TestCase
         ]);
     }
 
+    /**
+     * Update Article With Image Test
+     *
+     * @return void
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
     public function testCanUpdateAnArticleWithImage()
     {
         $article = Article::factory()->create();
@@ -87,6 +101,11 @@ class ArticleUpdateTest extends TestCase
         );
     }
 
+    /**
+     * Validate Update Article
+     *
+     * @return void
+     */
     public function testReturnsValidationErrorForTitleExceedingMaxLength()
     {
         $article = Article::factory()->create();

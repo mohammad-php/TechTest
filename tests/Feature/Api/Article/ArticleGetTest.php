@@ -12,6 +12,11 @@ class ArticleGetTest extends TestCase
 {
     use RefreshDatabase;
 
+    /**
+     * Get Article Test
+     *
+     * @return void
+     */
     public function testCanShowAnArticle()
     {
         $article = Article::factory()->create([
@@ -36,6 +41,11 @@ class ArticleGetTest extends TestCase
             ]);
     }
 
+    /**
+     * Validate Get Article Test
+     *
+     * @return void
+     */
     public function testReturnsNotFoundForNonExistentArticle()
     {
         $response = $this->getJson(
