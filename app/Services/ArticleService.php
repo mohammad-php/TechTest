@@ -36,8 +36,7 @@ class ArticleService
         try {
             return Article::create($request->validated());
         } catch (Exception $e) {
-            DB::rollBack();
-            throw new Exception('Failed to create article and upload image.');
+            throw new Exception('Failed to create article');
         }
 
     }
@@ -54,8 +53,12 @@ class ArticleService
         Article $article,
         UpdateArticleRequest $request,
     ): Article {
-        $article->update($request->validated());
-        return $article;
+        try {
+            $article->update($request->validated());
+            return $article;
+        } catch (Exception $e) {
+            throw new Exception('Failed to update article.');
+        }
     }
 
     /**

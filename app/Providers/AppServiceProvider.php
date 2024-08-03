@@ -7,7 +7,7 @@ use App\Observers\ArticleCreateObserver;
 use App\Observers\ArticleUpdateObserver;
 use App\Services\AWS\LambdaClientService;
 use App\Services\AWS\LambdaInvoker;
-use App\Services\LambdaNotificationService;
+use App\Services\AWS\LambdaNotificationService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

@@ -6,7 +6,7 @@ namespace App\Observers;
 
 use App\Enums\MediaCollection;
 use App\Models\Article;
-use App\Services\LambdaNotificationService;
+use App\Services\AWS\LambdaNotificationService;
 use App\Traits\HandlesMediaUploads;
 use Exception;
 

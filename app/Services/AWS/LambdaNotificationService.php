@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Services;
+namespace App\Services\AWS;
 
 use App\Jobs\NotifyLambdaOnArticleCreation;
-use App\Services\AWS\LambdaInvoker;
 
 class LambdaNotificationService
 {
