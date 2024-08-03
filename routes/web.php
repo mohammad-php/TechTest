@@ -4,6 +4,11 @@ use App\Http\Controllers\Web\ArticleController;
 use App\Http\Controllers\Web\FibonacciController;
 use Illuminate\Support\Facades\Route;
 
+
+Route::get('/', function () {
+    return view('landing');
+})->name('landing');
+
 Route::get(
     'articles', [ArticleController::class, 'index']
 )->name('articles.page.index');

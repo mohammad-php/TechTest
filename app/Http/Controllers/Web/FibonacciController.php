@@ -31,7 +31,7 @@ class FibonacciController extends Controller
      *
      * @return int
      */
-    public function basicRecursiveFibonacci(int $n): int
+    public function basicRecursiveFibonacci(int $n): int|float
     {
         if ($n <= 0) {
             return 0;
@@ -58,7 +58,7 @@ class FibonacciController extends Controller
      *
      * @return int
      */
-    public function optimizedMemoizationFibonacci(int $n): int
+    public function optimizedMemoizationFibonacci(int $n): int|float
     {
         if ($n <= 0) {
             return 0;
