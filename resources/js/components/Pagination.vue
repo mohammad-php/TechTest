@@ -2,6 +2,19 @@
   <nav class="pagination" aria-label="Page navigation">
     <ul class="pagination__list">
       <li
+          class="pagination__item pagination__item--prev"
+          :class="{ 'pagination__item--disabled': currentPage === 1 }"
+      >
+        <button
+            @click="changePage(currentPage - 1)"
+            class="pagination__link"
+            :class="{ 'pagination__link--disabled': currentPage === 1 }"
+        >
+          Previous
+        </button>
+      </li>
+
+      <li
           v-for="page in pages"
           :key="page"
           :class="['pagination__item', { 'pagination__item--active': page === currentPage }]"
@@ -14,18 +27,7 @@
           {{ page }}
         </button>
       </li>
-      <li
-          class="pagination__item pagination__item--prev"
-          :class="{ 'pagination__item--disabled': currentPage === 1 }"
-      >
-        <button
-            @click="changePage(currentPage - 1)"
-            class="pagination__link"
-            :class="{ 'pagination__link--disabled': currentPage === 1 }"
-        >
-          Previous
-        </button>
-      </li>
+
       <li
           class="pagination__item pagination__item--next"
           :class="{ 'pagination__item--disabled': currentPage === totalPages }"
@@ -56,7 +58,15 @@ export default {
   },
   computed: {
     pages() {
-      return Array.from({ length: this.totalPages }, (v, k) => k + 1);
+      const totalVisiblePages = 5;
+      let startPage = Math.max(1, this.currentPage - Math.floor(totalVisiblePages / 2));
+      let endPage = Math.min(this.totalPages, startPage + totalVisiblePages - 1);
+
+      if (endPage - startPage < totalVisiblePages - 1) {
+        startPage = Math.max(1, endPage - totalVisiblePages + 1);
+      }
+
+      return Array.from({ length: endPage - startPage + 1 }, (v, k) => startPage + k);
     },
   },
   methods: {
